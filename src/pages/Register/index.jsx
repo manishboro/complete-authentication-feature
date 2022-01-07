@@ -9,10 +9,12 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import CustomButton from "../../components/Reusable/Button";
 import CustomTextField from "../../components/Reusable/CustomTextField";
+import { signUpValidations } from "../../utils/validations";
 
 const Register = () => {
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "", passwordConfirm: "" },
+    validationSchema: signUpValidations,
     onSubmit: async (values) => {
       console.log(values);
     },
@@ -50,6 +52,8 @@ const Register = () => {
             handleChange={formik.handleChange}
             handleblur={formik.handleBlur}
             disabled={formik.isSubmitting}
+            errors={formik.errors.name}
+            touched={formik.touched.name}
           />
         </Grid>
 
@@ -61,6 +65,8 @@ const Register = () => {
             handleChange={formik.handleChange}
             handleblur={formik.handleBlur}
             disabled={formik.isSubmitting}
+            errors={formik.errors.email}
+            touched={formik.touched.email}
           />
         </Grid>
 
@@ -73,6 +79,8 @@ const Register = () => {
             handleChange={formik.handleChange}
             handleblur={formik.handleBlur}
             disabled={formik.isSubmitting}
+            errors={formik.errors.password}
+            touched={formik.touched.password}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -96,6 +104,8 @@ const Register = () => {
             handleChange={formik.handleChange}
             handleblur={formik.handleBlur}
             disabled={formik.isSubmitting}
+            errors={formik.errors.passwordConfirm}
+            touched={formik.touched.passwordConfirm}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -121,6 +131,8 @@ const Register = () => {
         <Grid item xs={12}>
           <CustomButton
             text="Register"
+            type="submit"
+            onClick={formik.handleSubmit}
             loading={formik.isSubmitting}
             disabled={formik.isSubmitting}
             style={{ minWidth: "100%", height: "5rem", fontSize: "2rem" }}

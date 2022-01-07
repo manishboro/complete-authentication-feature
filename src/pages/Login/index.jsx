@@ -9,10 +9,12 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import CustomButton from "../../components/Reusable/Button";
 import CustomTextField from "../../components/Reusable/CustomTextField";
+import { loginValidations } from "../../utils/validations";
 
 const Login = () => {
   const formik = useFormik({
     initialValues: { email: "", password: "" },
+    validationSchema: loginValidations,
     onSubmit: async (values) => {
       console.log(values);
     },
@@ -50,6 +52,8 @@ const Login = () => {
             handleChange={formik.handleChange}
             handleblur={formik.handleBlur}
             disabled={formik.isSubmitting}
+            errors={formik.errors.email}
+            touched={formik.touched.email}
           />
         </Grid>
 
@@ -62,6 +66,8 @@ const Login = () => {
             handleChange={formik.handleChange}
             handleblur={formik.handleBlur}
             disabled={formik.isSubmitting}
+            errors={formik.errors.password}
+            touched={formik.touched.password}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -87,6 +93,8 @@ const Login = () => {
         <Grid item xs={12}>
           <CustomButton
             text="Login"
+            type="submit"
+            onClick={formik.handleSubmit}
             loading={formik.isSubmitting}
             disabled={formik.isSubmitting}
             style={{ minWidth: "100%", height: "5rem", fontSize: "2rem" }}
